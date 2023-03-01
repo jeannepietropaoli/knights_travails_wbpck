@@ -25,6 +25,7 @@ Gameboard class can be found in the same directory inside the 'Gameboard.js' fil
 
 - Creating classes (constructor, parameters, getters, setters and methods)
 - Implement a graph abstract data structure
+- Practice and choose the best fitted graph search algorithms, Breadth First Search (BFS) in that case
 
 ## Features
 
