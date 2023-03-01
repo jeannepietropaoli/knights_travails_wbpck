@@ -4,19 +4,51 @@ import Knight from './Knight';
 import KnightRenderer from './KnightRenderer';
 import '../styles/main.css';
 
+const grid = document.querySelector('#chessGrid');
 const BOARD_SIZE = 8;
+const instructionsElement = document.querySelector('#instructions');
+const resetBtn = document.querySelector('#reset');
 const gameboard = new Gameboard(BOARD_SIZE);
 const gameboardRenderer = new GameboardRenderer(gameboard);
 gameboardRenderer.displayGrid(gameboard);
 
-const knight = new Knight(1, 1, BOARD_SIZE);
-const knightRenderer = new KnightRenderer(knight);
-knightRenderer.displayKnightOnGameBoard();
+function createKnightRenderer(knight) {
+  const knightRenderer = new KnightRenderer(knight);
+  knightRenderer.displayKnightOnGameBoard();
+  return knightRenderer;
+}
 
-// knightRenderer.position = [4, 4]; // also modifiy the knight position property
+function createPath(knight, knightRenderer, source, destination) {
+  const path = knight.findShortestPath(source, destination);
+  knightRenderer.displayPath(path);
+  knightRenderer.printPath(path);
+}
 
-const destination = [2, 6];
-const path = knight.findShortestPath(knight.position, destination);
+let source;
+let destination;
+let needToReset = false;
+let knight;
+let knightRenderer;
 
-knightRenderer.displayPath(path);
-knightRenderer.printPath(path);
+grid.addEventListener('click', (event) => {
+  if (!needToReset) {
+    if (source === undefined) {
+      source = JSON.parse(event.target.getAttribute('data-position'));
+      knight = new Knight(...source, BOARD_SIZE);
+      knightRenderer = createKnightRenderer(knight);
+      instructionsElement.textContent =
+        'Now choose a destination point for your knight';
+    } else {
+      destination = JSON.parse(event.target.getAttribute('data-position'));
+      createPath(knight, knightRenderer, source, destination);
+      instructionsElement.textContent = '';
+      needToReset = true;
+    }
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  needToReset = false;
+  source = undefined;
+  gameboardRenderer.clearGrid();
+});
