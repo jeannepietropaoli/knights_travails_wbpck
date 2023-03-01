@@ -11,10 +11,12 @@ gameboardRenderer.displayGrid(gameboard);
 
 const knight = new Knight(1, 1, BOARD_SIZE);
 const knightRenderer = new KnightRenderer(knight);
-knightRenderer.displayOnGameBoard();
+knightRenderer.displayKnightOnGameBoard();
 
-knightRenderer.position = [4, 4]; // also modifiy the knight position property
-console.log(knightRenderer.position);
-console.log(knight.position);
+// knightRenderer.position = [4, 4]; // also modifiy the knight position property
 
-console.log(knight.findShortestPath(knight.position, [8, 8]));
+const destination = [2, 6];
+const path = knight.findShortestPath(knight.position, destination);
+
+knightRenderer.displayPath(path);
+knightRenderer.printPath(path);

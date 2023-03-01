@@ -33,12 +33,35 @@ class KnightRenderer {
     );
   }
 
-  displayOnGameBoard() {
+  displayKnightOnGameBoard() {
     this.getDOMelement().style.backgroundColor = 'blue';
+  }
+
+  displayStep(stepPosition, index) {
+    const [x, y] = stepPosition;
+    const step = document.querySelector(`[data-position = "[${x},${y}]"]`);
+    step.style.backgroundColor = 'red';
+    step.textContent = index;
+  }
+
+  displayPath(path) {
+    for (let i = 1; i < path.length; i++) {
+      this.displayStep(path[i], i);
+    }
   }
 
   removeOfGameboard() {
     this.getDOMelement().style.backgroundColor = 'transparent';
+  }
+
+  printPath(path) {
+    const pathLength = path.length - 1;
+    const pathParagraph = document.querySelector('#path');
+    const pathString = `The knight made it in ${pathLength} steps : `;
+    pathParagraph.textContent = pathString;
+    path.forEach(
+      (move) => (pathParagraph.textContent += `[${move.toString()}]`)
+    );
   }
 }
 

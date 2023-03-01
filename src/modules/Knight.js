@@ -47,9 +47,8 @@ class Knight {
   }
 
   findShortestPath(source, destination) {
-    if (source[0] === destination[0] && source[1] === destination[1]) {
-      return [];
-    }
+    if (source[0] === destination[0] && source[1] === destination[1]) return [];
+
     const visited = [source];
     const queue = [[source]];
 
@@ -57,19 +56,17 @@ class Knight {
       const path = queue.shift();
       const [x, y] = path[path.length - 1];
 
-      if (x === destination[0] && y === destination[1]) {
-        return path;
-      }
+      if (x === destination[0] && y === destination[1]) return path;
 
-      const possibleMoves = this.getPossibleMoves(x, y);
-      for (let i = 0; i < possibleMoves.length; i++) {
-        const move = possibleMoves[i];
+      const moves = this.getPossibleMoves(x, y);
+      moves.forEach((move) => {
         if (!this.isVisited(visited, move)) {
           visited.push(move);
           queue.push([...path, move]);
         }
-      }
+      });
     }
+    return 'no path found';
   }
 }
 
