@@ -1,5 +1,9 @@
 # knights_travails_wbpck
 
+## Live version
+
+https://jeannepietropaoli.github.io/knights_travails_wbpck/
+
 ## Description
 
 Project inside the Odin Project's Full Stack JavaScript course.

@@ -51,4 +51,5 @@ resetBtn.addEventListener('click', () => {
   needToReset = false;
   source = undefined;
   gameboardRenderer.clearGrid();
+  instructionsElement.textContent = 'Choose a strating point for your knight';
 });
