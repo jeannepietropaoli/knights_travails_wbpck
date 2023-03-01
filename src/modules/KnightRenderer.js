@@ -24,7 +24,7 @@ class KnightRenderer {
     this.removeOfGameboard();
     this._knight.y = value;
     this._y = value;
-    this.display();
+    this.displayOnGameBoard();
   }
 
   getDOMelement() {

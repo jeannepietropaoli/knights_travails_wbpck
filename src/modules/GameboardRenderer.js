@@ -1,8 +1,7 @@
 class GameboardRenderer {
   constructor(gameboard) {
     this.gameboard = gameboard;
-    this.xMax = gameboard.xMax;
-    this.yMax = gameboard.yMax;
+    this.boardSize = gameboard.boardSize;
   }
 
   setDataPositionAttribute() {
@@ -33,9 +32,9 @@ class GameboardRenderer {
   }
 
   displayGrid() {
-    for (let y = 1; y <= this.gameboard.yMax; y++) {
+    for (let y = 1; y <= this.gameboard.boardSize; y++) {
       const column = this.displayColumn(y);
-      for (let x = 1; x <= this.gameboard.xMax; x++) {
+      for (let x = 1; x <= this.gameboard.boardSize; x++) {
         const square = this.displaySquare(column, x, y);
       }
     }

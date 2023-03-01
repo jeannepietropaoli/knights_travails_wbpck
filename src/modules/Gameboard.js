@@ -1,11 +1,17 @@
-import Square from './Square';
+// x = abscissa
+// y = ordinate
 
-function createGrid(xMax) {
-  const yMax = xMax;
+class Square {
+  constructor(x, y) {
+    this.position = [x, y];
+  }
+}
+
+function createGrid(boardSize) {
   const grid = [];
-  for (let y = 1; y <= yMax; y++) {
-    for (let x = 1; x <= xMax; x++) {
-      const square = new Square(x, y, xMax, yMax);
+  for (let y = 1; y <= boardSize; y++) {
+    for (let x = 1; x <= boardSize; x++) {
+      const square = new Square(x, y);
       grid.push(square);
     }
   }
@@ -13,10 +19,9 @@ function createGrid(xMax) {
 }
 
 class Gameboard {
-  constructor(xMax) {
-    this.xMax = xMax;
-    this.yMax = this.xMax;
-    this.board = createGrid(this.xMax);
+  constructor(boardSize) {
+    this.boardSize = boardSize;
+    this.board = createGrid(this.boardSize);
   }
 }
 
