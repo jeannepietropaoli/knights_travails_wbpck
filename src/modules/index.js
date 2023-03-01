@@ -12,6 +12,8 @@ const gameboard = new Gameboard(BOARD_SIZE);
 const gameboardRenderer = new GameboardRenderer(gameboard);
 gameboardRenderer.displayGrid(gameboard);
 
+document.querySelector('body').style.backgroundColor = 'lightgrey';
+
 function createKnightRenderer(knight) {
   const knightRenderer = new KnightRenderer(knight);
   knightRenderer.displayKnightOnGameBoard();
