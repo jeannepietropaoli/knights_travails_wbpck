@@ -5,14 +5,13 @@ class GameboardRenderer {
   }
 
   setDataPositionAttribute() {
-    Array.from(document.querySelectorAll('.square')).forEach(
-      (squareElement, index) => {
-        squareElement.setAttribute(
-          'data-position',
-          `[${this.gameboard.board[index].position}]`
-        );
-      }
-    );
+    const squares = Array.from(document.querySelectorAll('.square'));
+    squares.forEach((square, index) => {
+      square.setAttribute(
+        'data-position',
+        `[${this.gameboard.board[index].position}]`
+      );
+    });
   }
 
   displaySquare(column) {
@@ -32,10 +31,10 @@ class GameboardRenderer {
   }
 
   displayGrid() {
-    for (let y = 1; y <= this.gameboard.boardSize; y++) {
+    for (let y = 1; y <= this.boardSize; y++) {
       const column = this.displayColumn(y);
-      for (let x = 1; x <= this.gameboard.boardSize; x++) {
-        const square = this.displaySquare(column, x, y);
+      for (let x = 1; x <= this.boardSize; x++) {
+        this.displaySquare(column, x, y);
       }
     }
   }

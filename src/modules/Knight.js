@@ -1,41 +1,24 @@
-import Square from './Square';
-
 class Knight {
   constructor(x, y, boardSize) {
     this._x = x;
     this._y = y;
     this.boardSize = boardSize;
+    this._position = [x, y];
   }
 
-  // set and get instead
+  set position(newPosition) {
+    if (this.isValidPosition(newPosition)) {
+      [this._x, this._y] = newPosition;
+      this._position = newPosition;
+    }
+  }
+
   get position() {
-    return this._x > 0 &&
-      this._x <= this.boardSize &&
-      this._y > 0 &&
-      this._y <= this.boardSize
-      ? [this._x, this._y]
-      : 'outside of the gameboard';
-  }
-
-  get x() {
-    return this._x;
-  }
-
-  set x(value) {
-    if (value > 1 && value <= this.boardSize) this._x = value;
-  }
-
-  get y() {
-    return this._y;
-  }
-
-  set y(value) {
-    if (value > 1 && value <= this.boardSize) this._y = value;
+    return this._position;
   }
 
   isValidPosition(position) {
-    const x = position[0];
-    const y = position[1];
+    const [x, y] = position;
     return x <= this.boardSize && y <= this.boardSize && x >= 1 && y >= 1;
   }
 
