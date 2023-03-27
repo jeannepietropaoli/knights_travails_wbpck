@@ -1,3 +1,5 @@
+import knightPic from '../assets/knightPic.png';
+
 class KnightRenderer {
   constructor(knight) {
     this._knight = knight;
@@ -5,6 +7,7 @@ class KnightRenderer {
     this._y = knight._y;
     this.boardSize = knight.boardSize;
     this._position = [this._x, this._y];
+    this.pathParagraph = document.querySelector('#path');
   }
 
   set position(newPosition) {
@@ -34,19 +37,22 @@ class KnightRenderer {
   }
 
   displayKnightOnGameBoard() {
-    this.getDOMelement().style.backgroundColor = 'blue';
+    const knightImage = document.createElement('img');
+    knightImage.setAttribute('id', 'knightImage');
+    knightImage.setAttribute('src', knightPic);
+    this.getDOMelement().appendChild(knightImage);
   }
 
-  displayStep(stepPosition, index) {
+  displayStep(stepPosition, index, opacity) {
     const [x, y] = stepPosition;
     const step = document.querySelector(`[data-position = "[${x},${y}]"]`);
-    step.style.backgroundColor = 'red';
+    step.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
     step.textContent = index;
   }
 
   displayPath(path) {
     for (let i = 1; i < path.length; i++) {
-      this.displayStep(path[i], i);
+      this.displayStep(path[i], i, i * (1 / path.length));
     }
   }
 
@@ -56,12 +62,15 @@ class KnightRenderer {
 
   printPath(path) {
     const pathLength = path.length - 1;
-    const pathParagraph = document.querySelector('#path');
     const pathString = `The knight made it in ${pathLength} steps : `;
-    pathParagraph.textContent = pathString;
+    this.pathParagraph.textContent = pathString;
     path.forEach(
-      (move) => (pathParagraph.textContent += `[${move.toString()}]`)
+      (move) => (this.pathParagraph.textContent += `[${move.toString()}]`)
     );
+  }
+
+  erasePath() {
+    this.pathParagraph.textContent = '';
   }
 }
 

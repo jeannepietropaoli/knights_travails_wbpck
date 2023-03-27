@@ -12,8 +12,6 @@ const gameboard = new Gameboard(BOARD_SIZE);
 const gameboardRenderer = new GameboardRenderer(gameboard);
 gameboardRenderer.displayGrid(gameboard);
 
-document.querySelector('body').style.backgroundColor = 'lightgrey';
-
 function createKnightRenderer(knight) {
   const knightRenderer = new KnightRenderer(knight);
   knightRenderer.displayKnightOnGameBoard();
@@ -43,7 +41,8 @@ grid.addEventListener('click', (event) => {
     } else {
       destination = JSON.parse(event.target.getAttribute('data-position'));
       createPath(knight, knightRenderer, source, destination);
-      instructionsElement.textContent = '';
+      instructionsElement.textContent =
+        'Path found, reset to create a new path';
       needToReset = true;
     }
   }
@@ -53,5 +52,6 @@ resetBtn.addEventListener('click', () => {
   needToReset = false;
   source = undefined;
   gameboardRenderer.clearGrid();
+  knightRenderer.erasePath();
   instructionsElement.textContent = 'Choose a strating point for your knight';
 });
