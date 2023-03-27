@@ -2,6 +2,7 @@ class GameboardRenderer {
   constructor(gameboard) {
     this.gameboard = gameboard;
     this.boardSize = gameboard.boardSize;
+    this.chessGrid = document.querySelector('#chessGrid');
   }
 
   get squares() {
@@ -26,10 +27,9 @@ class GameboardRenderer {
   }
 
   displayColumn(columnNumber) {
-    const chessGrid = document.querySelector('#chessGrid');
     const column = document.createElement('div');
     column.classList.add(`column${columnNumber}`, 'column');
-    chessGrid.appendChild(column);
+    this.chessGrid.appendChild(column);
     return column;
   }
 
@@ -43,10 +43,8 @@ class GameboardRenderer {
   }
 
   clearGrid() {
-    this.squares.forEach((square) => {
-      square.style.backgroundColor = 'transparent';
-      square.textContent = '';
-    });
+    this.chessGrid.replaceChildren();
+    this.displayGrid();
   }
 }
 
